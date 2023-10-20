@@ -1,0 +1,282 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "commerce": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/commerce",
+      "sourceRoot": "projects/commerce/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/commerce",
+            "index": "projects/commerce/src/index.html",
+            "main": "projects/commerce/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/commerce/tsconfig.app.json",
+            "assets": [
+              "projects/commerce/src/favicon.ico",
+              "projects/commerce/src/assets"
+            ],
+            "styles": [
+              "projects/commerce/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "commerce:build:production"
+            },
+            "development": {
+              "browserTarget": "commerce:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "commerce:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/commerce/tsconfig.spec.json",
+            "assets": [
+              "projects/commerce/src/favicon.ico",
+              "projects/commerce/src/assets"
+            ],
+            "styles": [
+              "projects/commerce/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "new_commerce": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/new_commerce",
+      "sourceRoot": "projects/new_commerce/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/new_commerce",
+            "index": "projects/new_commerce/src/index.html",
+            "main": "projects/new_commerce/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/new_commerce/tsconfig.app.json",
+            "assets": [
+              "projects/new_commerce/src/favicon.ico",
+              "projects/new_commerce/src/assets"
+            ],
+            "styles": [
+              "projects/new_commerce/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "new_commerce:build:production"
+            },
+            "development": {
+              "browserTarget": "new_commerce:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "new_commerce:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/new_commerce/tsconfig.spec.json",
+            "assets": [
+              "projects/new_commerce/src/favicon.ico",
+              "projects/new_commerce/src/assets"
+            ],
+            "styles": [
+              "projects/new_commerce/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    },
+    "commerceUpdated": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/commerce-updated",
+      "sourceRoot": "projects/commerce-updated/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/commerce-updated",
+            "index": "projects/commerce-updated/src/index.html",
+            "main": "projects/commerce-updated/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/commerce-updated/tsconfig.app.json",
+            "assets": [
+              "projects/commerce-updated/src/favicon.ico",
+              "projects/commerce-updated/src/assets"
+            ],
+            "styles": [
+              "projects/commerce-updated/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "commerceUpdated:build:production",
+              "proxyConfig": "proxy.config.json"
+            },
+            "development": {
+              "browserTarget": "commerceUpdated:build:development",
+              "proxyConfig": "proxy.config.json"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "commerceUpdated:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/commerce-updated/tsconfig.spec.json",
+            "assets": [
+              "projects/commerce-updated/src/favicon.ico",
+              "projects/commerce-updated/src/assets"
+            ],
+            "styles": [
+              "projects/commerce-updated/src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  }
+}

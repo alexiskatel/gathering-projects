@@ -1,0 +1,29 @@
+.bar {
+  padding: 0;
+  background-color: rgb(50, 73, 119);
+}
+
+.logo {
+  width: 50%;
+}
+
+.bar a {
+  color: white;
+  font-size: 1.2em;
+}
+
+.bar a:hover {
+  color: yellow;
+}
+
+.btn-warning-modify {
+  background-color: #f79d42;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.activeLink {
+  color: yellow !important;
+}

@@ -1,0 +1,111 @@
+<app-navbar [cartIsActive]="true" [data]="data" (dataChange)="onDataChange($event)"></app-navbar>
+<section id="detail">
+  <div class="align-self-center col-12">
+    <div class="">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+          <div class="shadow-lg p-3 bg-body rounded">
+            <div class="card border-0">
+              <div class="card-body">
+                <h4 class="card-title text-center"></h4>
+                <div class="card-text">
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-flex justify-content-center">
+                        <img
+                          src="../../../../assets/images/novashop.png"
+                          alt=""
+                          class="mb-2 ms-3"
+                        />
+                      </div>
+                      <p class="mb-4 fs-3 fw-bold text-center">Connexion</p>
+                      <p
+                        *ngIf="!continue"
+                        id="submit"
+                        class="text-danger fw-bold fs-6 text-center"
+                      >
+                        Les identifiants entrés sont incorrects
+                      </p>
+                      <form
+                        novalidate
+                        (submit)="onSubmit($event)"
+                        [formGroup]="login"
+                        class="mx-1 mx-md-4"
+                      >
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <!-- <i class="fas fa-envelope fa-lg fa-fw pt-4"></i> -->
+                          <div class="form-outline flex-fill">
+                            <label for="mail" class="form-label">E-mail</label>
+                            <input
+                              type="email"
+                              id="mail"
+                              email
+                              required
+                              formControlName="email"
+                              class="form-control is-invalid"
+                              placeholder="ex: example@gmail.com"
+                              [ngClass]="{
+                                'is-invalid':
+                                  login.get('email')?.touched &&
+                                  login.get('email')?.invalid
+                              }"
+                            />
+                            <div class="invalid-feedback">
+                              <span
+                                *ngIf="login.get('email')?.errors?.['required']"
+                                >Ce champ est requis</span
+                              >
+                              <span
+                                *ngIf="login.get('email')?.errors?.['email']"
+                                >Adresse email invalide</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex flex-row align-items-center mb-4">
+                          <div class="form-outline flex-fill mb-0">
+                            <label class="form-label" for="code"
+                              >Code secret</label
+                            >
+                            <input
+                              type="password"
+                              id="code"
+                              class="form-control"
+                              required
+                              formControlName="secretCode"
+                              [ngClass]="{
+                                'is-invalid':
+                                  login.get('secretCode')?.touched &&
+                                  login.get('secretCode')?.invalid
+                              }"
+                            />
+                            <div class="invalid-feedback">
+                              <span
+                                *ngIf="login.get('secretCode')?.errors?.['required']"
+                                >Ce champ est requis</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                          <button
+                            type="submit"
+                            class="btn btn-success btn-md mb-sm-0 mb-5"
+                            [disabled]="!login.valid"
+                            id="btnSubmit"
+                          >
+                            Se connecter
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,4 @@
+{
+  "urlPostData": "",
+  "urlGetUserData": "http://localhost:3000/obtaindatauser"
+}

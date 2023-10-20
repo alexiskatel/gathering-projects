@@ -1,0 +1,231 @@
+<app-navbar></app-navbar>
+<div>
+  <div class="container mt-5 pt-5" *ngIf="continue">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card border-0 text-black">
+          <div class="card-body p-md-5">
+            <div class="justify-content-center">
+              <div class="shadow-lg p-3 bg-body rounded">
+                <div class="card border-0">
+                  <div class="card-body">
+                    <h4 class="card-title text-center">
+                      Liste des produits choisis
+                    </h4>
+                    <div class="card-text">
+                      <div class="row">
+                        <div class="col" *ngFor="let produit of data.produits">
+                          <div class="d-flex">
+                            <img
+                              [src]="produit.picture"
+                              [alt]="produit.nom"
+                              style="width: 20vh; height: 20vh"
+                            />
+                            <div class="mt-4 mx-2" style="font-size: 1.1rem">
+                              <p class="mb-1">
+                                <span class="fw-bold badge bg-primary"
+                                  >Nom:</span
+                                >
+                                {{ produit.nom }}
+                              </p>
+                              <p class="mb-1">
+                                <span class="fw-bold badge bg-success"
+                                  >Quantité:</span
+                                >
+                                {{ produit.quantite }}
+                              </p>
+                              <p>
+                                <span class="fw-bold badge bg-danger"
+                                  >Prix:</span
+                                >
+                                {{ produit.prix | currency }}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="mt-5">
+                      <p class="fs-5">
+                        Le solde total de votre panier est de
+                        <span class="fw-bold text-success">{{
+                          data.price | currency
+                        }}</span>
+                        avec
+                        <span class="fw-bold">
+                          {{ data.produits.length }}
+                        </span>
+                        produit<span *ngIf="data.produits.length > 1">s</span>
+                        acheté<span *ngIf="data.produits.length > 1">s</span>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-start">
+                <div class="col-12">
+                  <p class="text-center fs-3 fw-bold my-5">
+                    Renseignez vos informations personnelles
+                  </p>
+
+                  <form
+                    novalidate
+                    (submit)="onSubmit($event)"
+                    [formGroup]="register"
+                    class="mx-1 mx-md-4"
+                  >
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <!-- <i class="fas fa-users fa-lg me-3 mb-4"></i> -->
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="lastName">Nom</label>
+                        <input
+                        #lastName
+                          type="text"
+                          id="lastName"
+                          class="form-control input"
+                          placeholder="ex: Doe"
+                          minlength="3"
+                          required
+                          formControlName="lastName"
+                          [ngClass]="{
+                            'is-invalid':
+                              register.get('lastName')?.touched &&
+                              register.get('lastName')?.invalid
+                          }"
+                        />
+                        <div class="invalid-feedback">
+                          <span
+                            *ngIf="register.get('lastName')?.errors?.['required']"
+                            >Ce champ est requis</span
+                          >
+                          <span
+                            *ngIf="register.get('lastName')?.errors?.['minlength']"
+                            >Minimum 3 charactères</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <!-- <i class="fas fa-user fa-lg me-3 fa-fw mb-4"></i> -->
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="firstName">Prénom</label>
+                        <input
+                        #firstName
+                          type="text"
+                          id="firstName"
+                          class="form-control input"
+                          placeholder="ex: John"
+                          required
+                          minlength="3"
+                          formControlName="firstName"
+                          [ngClass]="{
+                            'is-invalid':
+                              register.get('firstName')?.touched &&
+                              register.get('firstName')?.invalid
+                          }"
+                        />
+                        <div class="invalid-feedback">
+                          <span
+                            *ngIf="register.get('firstName')?.errors?.['required']"
+                            >Ce champ est requis</span
+                          >
+                          <span
+                            *ngIf="register.get('firstName')?.errors?.['minlength']"
+                            >Minimum 3 charactères</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <!-- <i class="fas fa-envelope fa-lg fa-fw pt-4"></i> -->
+                      <div class="form-outline flex-fill">
+                        <label for="mail" class="form-label">E-mail</label>
+                        <input
+                        #email
+                          type="email"
+                          id="mail"
+                          email
+                          required
+                          formControlName="email"
+                          class="form-control input"
+                          placeholder="ex: example@gmail.com"
+                          [ngClass]="{
+                            'is-invalid':
+                              register.get('email')?.touched &&
+                              register.get('email')?.invalid
+                          }"
+                        />
+                        <div class="invalid-feedback">
+                          <span
+                            *ngIf="register.get('email')?.errors?.['required']"
+                            >Ce champ est requis</span
+                          >
+                          <span *ngIf="register.get('email')?.errors?.['email']"
+                            >Adresse email invalide</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex flex-row align-items-center mb-4">
+                      <div class="form-outline flex-fill mb-0">
+                        <label class="form-label" for="code">Code secret</label>
+                        <input
+                        #secretCode
+                          type="text"
+                          id="code"
+                          class="form-control input"
+                          minlength="3"
+                          required
+                          formControlName="secretCode"
+                          [ngClass]="{
+                            'is-invalid':
+                              register.get('secretCode')?.touched &&
+                              register.get('secretCode')?.invalid
+                          }"
+                        />
+                        <small
+                          class="text-success fw-bold"
+                          *ngIf="register.get('secretCode')?.dirty"
+                          >Ce code vous sera utile pour suivre toutes vos
+                          commandes sur NovaShop</small
+                        >
+                        <div class="invalid-feedback">
+                          <span
+                            *ngIf="register.get('secretCode')?.errors?.['required']"
+                            >Ce champ est requis</span
+                          >
+                          <span
+                            *ngIf="register.get('secretCode')?.errors?.['minlength']"
+                            >Minimum 3 charactères</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <button
+                        type="submit"
+                        class="btn btn-primary btn-lg mb-sm-0 mb-5"
+                        [disabled]="!register.valid"
+                        id="btnSubmit"
+                      >
+                        Valider
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container text-center text-danger fst-italic text-uppercase fs-1 fw-bold"
+    style="margin-top: 43vh"
+    *ngIf="!continue"
+  >
+    Votre panier est vide !!!
+  </div>
+</div>

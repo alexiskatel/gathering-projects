@@ -1,0 +1,60 @@
+<app-navbar  [data]="data" [cartIsActive]="true" (dataChange)="onDataChange($event)"></app-navbar>
+<section style="margin-top: 10vh">
+  <div id="toast" class="d-flex justify-content-end position-fixed">
+    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div
+        class="toast-header bg-success text-center"
+        *ngIf="allData | async as Data"
+      >
+        <strong class="text-white text-center mx-auto fs-6"
+          >Vous êtes connecté en tant que {{ Data[0].prenom }} {{ Data[0].nom }}
+        </strong>
+      </div>
+    </div>
+  </div>
+  <div class="container-md mt-5 pt-5">
+    <h1 class="text-center">Liste des transactions éffectuées</h1>
+  </div>
+  <div class="table-responsive mt-5 px-5">
+    <table class="table table-striped">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">#</th>
+          <th scope="col" *ngIf="isAdmin">Nom</th>
+          <th scope="col" *ngIf="isAdmin">Prenom</th>
+          <th scope="col" *ngIf="isAdmin">E-mail</th>
+          <th scope="col">Produit(s)</th>
+          <th scope="col">Prix total</th>
+          <th scope="col">Date</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="allData | async as Data">
+        <tr class="text-center" *ngFor="let data of Data">
+          <td>{{ Data.indexOf(data) + 1 }}</td>
+          <td *ngIf="isAdmin">{{ data.nom }}</td>
+          <td *ngIf="isAdmin">{{ data.prenom }}</td>
+          <td *ngIf="isAdmin">{{ data.email }}</td>
+          <td>{{ data.produits }}</td>
+          <td>{{ data.prixTotal | currency }}</td>
+          <td>{{ data.date }}</td>
+          <td>
+            <button
+              (click)="onDetailClcik(data.idPanier)"
+              class="btn btn-success"
+            >
+              Détail
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="allData | async as Data">
+      <div class="text-center col-12" *ngIf="Data.length === 0">
+        <h2 class="text-danger text-uppercase fst-italic">
+          Aucune donnée trouvée
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>

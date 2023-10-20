@@ -1,0 +1,200 @@
+<nav class="navbar navbar-expand-md bar fixed-top">
+  <div class="container-md">
+    <a  *ngIf="!isAdmin" routerLink="" class="navbar-brand fw-bold">
+      <img
+        src="../../../assets/images/novashop_logo.png"
+        alt="LOGO"
+        class="logo"
+      />
+    </a>
+    <a  *ngIf="isAdmin" routerLink="/novashop/marketplace/dashboard" class="navbar-brand fw-bold">
+      <img
+        src="../../../assets/images/novashop_logo.png"
+        alt="LOGO"
+        class="logo"
+      />
+    </a>
+    <div class="d-flex" *ngIf="!isAdmin">
+      <button
+        class="btn btn-warning mt-1 mx-3 position-relative d-md-none d-block"
+        data-bs-toggle="modal"
+        data-bs-target="#panier"
+        *ngIf="cartIsActive"
+      >
+        <i class="fa-solid fa-cart-shopping"></i>
+        Panier
+        <span
+          class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+        >
+          {{ data.produits.length }}
+        </span>
+      </button>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLink="/">Accueil</a>
+        </li> -->
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">Contactez-nous</a>
+        </li> -->
+        <li class="nav-item" *ngIf="!isAdmin">
+          <a
+            class="nav-link"
+            routerLink="/novashop/marketplace/products"
+            routerLinkActive="activeLink"
+            >Boutique</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/novashop/marketplace/dashboard"
+            routerLinkActive="activeLink"
+            >Tableau de bord</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="!hasToken">
+          <a
+            class="nav-link"
+            routerLink="/novashop/marketplace/login"
+            routerLinkActive="activeLink"
+            >Connexion</a
+          >
+        </li>
+        <li class="nav-item d-md-block d-none" *ngIf="cartIsActive && !isAdmin">
+          <button
+            class="btn-warning-modify align-self-center mt-1 position-relative"
+            data-bs-toggle="modal"
+            data-bs-target="#panier"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            Panier
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+            >
+              {{ data.produits.length }}
+            </span>
+          </button>
+        </li>
+        <li class="nav-item ms-3" *ngIf="hasToken" (click)="logout()">
+          <span class="nav-link"
+            ><i class="fa fa-sign-out fs-4 pt-1 pointer text-white"></i
+          ></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div
+  class="modal fade bg-modal"
+  id="panier"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog custom-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Panier</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Produits</th>
+                <th scope="col">Quantité</th>
+                <th scope="col">Prix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="" *ngFor="let produit of data.produits">
+                <td scope="row">{{ produit.nom }}</td>
+                <td class="d-flex justify-content-start">
+                  <button
+                    id="{{ produit.nom + '-minus' }}"
+                    class="btn-danger border-0"
+                    (click)="onClickMinus(produit.nom)"
+                  >
+                    <i class="fa fa-minus"></i>
+                  </button>
+                  <div
+                    id="{{ produit.nom }}"
+                    class="col-1 ms-2 me-3 text-start"
+                  >
+                    {{ produit.quantite }}
+                  </div>
+                  <button
+                    id="{{ produit.nom + '-plus' }}"
+                    class="btn-primary border-0"
+                    (click)="onClickPlus(produit.nom)"
+                  >
+                    <i class="fa fa-plus"></i>
+                  </button>
+                </td>
+                <td>{{ produit.prix | currency }}</td>
+                <td>
+                  <button
+                    class="border-0 bg-warning"
+                    (click)="onDelete(produit.nom)"
+                  >
+                    X
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" class="fw-bold">Total</td>
+                <td class="fw-bold">
+                  {{ data.price | currency }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <div>
+          <button type="button" class="btn btn-secondary me-1" (click)="onTrash()">
+            Vider
+          </button>
+        </div>
+       <div >
+        <button type="button" class="btn btn-danger me-1" data-bs-dismiss="modal">
+          Fermer
+        </button>
+        <button
+          type="button"
+          id="payer"
+          [ngClass]="{ disabled: data.produits.length == 0 }"
+          class="btn btn-success"
+          data-bs-dismiss="modal"
+          (click)="OnValidCart()"
+        >
+          Acheter
+        </button>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>

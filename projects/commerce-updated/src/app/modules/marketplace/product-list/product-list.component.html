@@ -1,0 +1,70 @@
+<app-navbar [cartUpdateSelf]="false" [cartIsActive]="true" [data]="data" (dataChange)="onDataChange($event)"></app-navbar>
+<section>
+  <div class="container-md mt-5 pt-5">
+    <main>
+      <div id="toast" class="d-flex justify-content-end">
+        <div
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <div class="toast-header bg-success">
+            <strong class="me-auto"
+              >Produit ajouté au panier avec succès</strong
+            >
+            <!-- <small>à l'instant</small> -->
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="toast"
+              aria-label="Fermer"
+            ></button>
+          </div>
+        </div>
+      </div>
+      <div id="toastr" class="d-flex justify-content-end position-fixed">
+        <div class="toast toastr" role="alert" aria-live="assertive" aria-atomic="true">
+          <div
+            class="toast-header bg-danger text-center"
+          >
+            <strong class="text-white text-center mx-auto fs-6"
+              >Déconnexion réussie
+            </strong>
+          </div>
+        </div>
+      </div>
+      <div
+        class="container-fluid bg-trasparent my-5 p-3"
+        style="position: relative"
+      >
+        <div
+          class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3"
+        >
+          <div class="col mb-3" *ngFor="let produit of produits">
+            <div class="card h-100 shadow-sm" id="{{ produit.nom + '-id' }}">
+              <img [src]="produit.picture" class="card-img-top" alt="..." />
+              <div class="label-top shadow-sm">{{ produit.nom }}</div>
+              <div class="card-body">
+                <div class="clearfix mb-3">
+                  <span
+                    class="float-start badge rounded-pill bg-primary fs-6"
+                    >{{ produit.prix | currency }}</span
+                  >
+                </div>
+                <h5 class="card-title">
+                  {{ produit.description }}
+                </h5>
+                <div class="text-center my-4">
+                  <button class="btn btn-warning" (click)="addToCart(produit)">
+                    <i class="fa-solid fa-plus"></i> AJOUTER
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </main>
+  </div>
+</section>
